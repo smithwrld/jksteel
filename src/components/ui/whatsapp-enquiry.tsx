@@ -27,15 +27,9 @@ export const WhatsAppEnquiry = ({
       return;
     }
 
-    const message = `Hi! I'm interested in the ${productName}. 
+    const message = `Hi! I'm interested in the ${productName}.%0A%0ACustomer Details:%0AName: ${customerName}%0APhone: ${customerNumber}%0A%0APlease share more details about pricing and availability. Thank you!`;
 
-Customer Details:
-Name: ${customerName}
-Phone: ${customerNumber}
-
-Please share more details about pricing and availability. Thank you!`;
-
-    const whatsappUrl = `https://wa.me/916353786749?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/916353786749?text=${message}`;
     window.open(whatsappUrl, '_blank');
     
     // Reset form and close dialog
