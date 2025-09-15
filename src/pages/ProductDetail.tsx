@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import LightningImage from "@/components/ui/lightning-image";
+import { WhatsAppEnquiry } from "@/components/ui/whatsapp-enquiry";
 import { products, type Product } from "@/data/products";
 const ProductDetail = () => {
   const {
@@ -108,12 +109,13 @@ const ProductDetail = () => {
                 {product.title}
               </h1>
 
-              {/* Price */}
-              <div className="flex items-center space-x-3 mb-6">
-                <span className="text-3xl font-bold text-slate-200">{product.price}</span>
-                {product.originalPrice && <span className="text-xl text-muted-foreground line-through">
-                    {product.originalPrice}
-                  </span>}
+              {/* WhatsApp Enquiry */}
+              <div className="mb-6">
+                <WhatsAppEnquiry 
+                  productName={product.title}
+                  size="lg"
+                  className="w-full sm:w-auto"
+                />
               </div>
             </div>
 
@@ -248,10 +250,9 @@ const ProductDetailSkeleton = () => {
               
               <Skeleton className="h-12 w-3/4 mb-4" />
 
-              {/* Price Skeleton */}
-              <div className="flex items-center space-x-3 mb-6">
-                <Skeleton className="h-8 w-24" />
-                <Skeleton className="h-6 w-20" />
+              {/* WhatsApp Enquiry Skeleton */}
+              <div className="mb-6">
+                <Skeleton className="h-12 w-48" />
               </div>
             </div>
 

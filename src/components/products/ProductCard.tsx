@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Eye, Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LightningImage from "@/components/ui/lightning-image";
+import { WhatsAppEnquiry } from "@/components/ui/whatsapp-enquiry";
 interface ProductCardProps {
   id: string;
   title: string;
-  price: string;
-  originalPrice?: string;
   image: string;
   category: string;
   isNew?: boolean;
@@ -15,8 +14,6 @@ interface ProductCardProps {
 const ProductCard = ({
   id,
   title,
-  price,
-  originalPrice,
   image,
   category,
   isNew = false,
@@ -67,12 +64,14 @@ const ProductCard = ({
           {title}
         </h3>
 
-        {/* Price */}
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          <span className="text-lg sm:text-xl font-bold text-gradient-secondary no-text-glow">{price}</span>
-          {originalPrice && <span className="text-sm text-white/50 line-through">
-              {originalPrice}
-            </span>}
+        {/* WhatsApp Enquiry */}
+        <div className="pt-2">
+          <WhatsAppEnquiry 
+            productName={title}
+            size="sm"
+            variant="glass"
+            className="w-full"
+          />
         </div>
       </div>
     </div>;
