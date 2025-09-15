@@ -96,8 +96,8 @@ const Home = () => {
           <div className="text-center max-w-4xl mx-auto">
             {/* Premium Badge */}
             <div className="inline-flex items-center gap-2 glass-card rounded-full px-6 py-3 mb-8" style={{
-              animation: "hero-text-reveal 1.2s ease-out 0.1s both"
-            }}>
+            animation: "hero-text-reveal 1.2s ease-out 0.1s both"
+          }}>
               <Sparkles className="w-4 h-4 text-purple-400" />
               <span className="text-sm font-medium text-white">Crafted for Culinary Excellence</span>
               <Award className="w-4 h-4 text-yellow-400" />
@@ -109,9 +109,7 @@ const Home = () => {
           }}>
               Luxe{" "}
               <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Kitchen
-                </span>
+                <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">Steel</span>
               </span>
             </h1>
             
@@ -124,8 +122,8 @@ const Home = () => {
             
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 w-full max-w-md sm:max-w-none mx-auto" style={{
-              animation: "hero-text-reveal 1.2s ease-out 0.9s both"
-            }}>
+            animation: "hero-text-reveal 1.2s ease-out 0.9s both"
+          }}>
               <Button size="lg" className="glass-button text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto" asChild>
                 <Link to="/products">
                   Explore Collection
@@ -382,9 +380,7 @@ const Home = () => {
               <div className="flex items-center mb-4 sm:mb-6">
                 <Quote className="w-6 sm:w-8 h-6 sm:h-8 text-purple-400 mr-3" />
                 <div className="flex space-x-1">
-                  {[1,2,3,4,5].map(star => (
-                    <Star key={star} className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 fill-current" />
-                  ))}
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 fill-current" />)}
                 </div>
               </div>
               <p className="text-slate-200 mb-4 sm:mb-6 italic text-sm sm:text-base">
@@ -405,9 +401,7 @@ const Home = () => {
               <div className="flex items-center mb-4 sm:mb-6">
                 <Quote className="w-6 sm:w-8 h-6 sm:h-8 text-purple-400 mr-3" />
                 <div className="flex space-x-1">
-                  {[1,2,3,4,5].map(star => (
-                    <Star key={star} className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 fill-current" />
-                  ))}
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 fill-current" />)}
                 </div>
               </div>
               <p className="text-slate-200 mb-4 sm:mb-6 italic text-sm sm:text-base">
@@ -428,9 +422,7 @@ const Home = () => {
               <div className="flex items-center mb-4 sm:mb-6">
                 <Quote className="w-6 sm:w-8 h-6 sm:h-8 text-purple-400 mr-3" />
                 <div className="flex space-x-1">
-                  {[1,2,3,4,5].map(star => (
-                    <Star key={star} className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 fill-current" />
-                  ))}
+                  {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 fill-current" />)}
                 </div>
               </div>
               <p className="text-slate-200 mb-4 sm:mb-6 italic text-sm sm:text-base">
@@ -705,11 +697,7 @@ const Home = () => {
 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <div className="flex-1">
-                    <input 
-                      type="email" 
-                      placeholder="Enter your email address"
-                      className="w-full px-4 py-3 glass-card rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                    />
+                    <input type="email" placeholder="Enter your email address" className="w-full px-4 py-3 glass-card rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-400" />
                   </div>
                   <Button className="glass-button px-6 py-3">
                     <Mail className="w-4 h-4 mr-2" />
