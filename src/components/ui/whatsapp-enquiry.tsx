@@ -3,7 +3,7 @@ import { MessageCircle, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 
 interface WhatsAppEnquiryProps {
   productName: string;
@@ -62,14 +62,17 @@ Please share more details about pricing and availability. Thank you!`;
         </Button>
       </DialogTrigger>
       
-      <DialogContent className="glass-card border-white/20">
+      <DialogContent className="glass-card border-white/20" onClick={(e) => e.stopPropagation()}>
         <DialogHeader>
           <DialogTitle className="text-foreground">
             Enquiry for {productName}
           </DialogTitle>
+          <DialogDescription className="text-muted-foreground">
+            Fill in your details below and we'll send a WhatsApp message with your enquiry.
+          </DialogDescription>
         </DialogHeader>
         
-        <div className="space-y-4 py-4">
+        <div className="space-y-4 py-4" onClick={(e) => e.stopPropagation()}>
           <div className="space-y-2">
             <Label htmlFor="customer-name" className="text-foreground">
               Your Name *
@@ -79,6 +82,7 @@ Please share more details about pricing and availability. Thank you!`;
               placeholder="Enter your full name"
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
               className="glass-card border-white/20"
             />
           </div>
@@ -92,6 +96,7 @@ Please share more details about pricing and availability. Thank you!`;
               placeholder="Enter your phone number"
               value={customerNumber}
               onChange={(e) => setCustomerNumber(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
               className="glass-card border-white/20"
             />
           </div>
@@ -99,14 +104,20 @@ Please share more details about pricing and availability. Thank you!`;
           <div className="flex justify-end space-x-2 pt-4">
             <Button 
               variant="outline" 
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpen(false);
+              }}
               className="glass-button border-white/20"
             >
               <X className="w-4 h-4 mr-2" />
               Cancel
             </Button>
             <Button 
-              onClick={handleSendEnquiry}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSendEnquiry();
+              }}
               disabled={!customerName.trim() || !customerNumber.trim()}
               className="bg-green-600 hover:bg-green-700 text-white"
             >
