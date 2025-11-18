@@ -20,34 +20,48 @@ const ProductCard = ({
   onViewDetails
 }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  return <div className="group liquid-glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 cursor-pointer transition-all duration-150 ease-out hover:border-white/30" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={() => onViewDetails(id)}>
+  return (
+    <div
+      className="group liquid-glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 cursor-pointer transition-all duration-150 ease-out hover:border-white/30"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onViewDetails(id)}
+    >
       {/* Product Image */}
-      <div className="relative overflow-hidden rounded-xl sm:rounded-2xl mb-4 sm:mb-6 p-4 sm:p-8">
-        {isNew && <div className="absolute top-2 left-2 z-10">
+      <div className="relative overflow-hidden rounded-xl sm:rounded-2xl mb-3 sm:mb-6 p-3 sm:p-8">
+        {isNew && (
+          <div className="absolute top-2 left-2 z-10">
             <span className="bg-accent text-accent-foreground text-xs font-medium px-2 py-1 rounded-full">
               New
             </span>
-          </div>}
-        
-        
+          </div>
+        )}
 
         {/* Product Image with Lightning Fast Loading */}
         <LightningImage
           src={image}
           alt={title}
-          className="w-full h-48 sm:h-64 object-contain transition-all duration-300 ease-out group-hover:scale-105"
-          skeletonClassName="w-full h-48 sm:h-64 rounded-lg"
+          className="w-full h-40 xs:h-44 sm:h-64 object-contain transition-all duration-300 ease-out group-hover:scale-105"
+          skeletonClassName="w-full h-40 xs:h-44 sm:h-64 rounded-lg"
           priority="high"
           loadingAnimation="shimmer"
           lazyLoad={false}
         />
 
         {/* Hover Actions */}
-        <div className={`absolute inset-0 bg-black/30 backdrop-blur-sm rounded-2xl flex items-center justify-center transition-all duration-150 ease-out ${isHovered ? "opacity-100" : "opacity-0"}`}>
-          <Button size="sm" className="liquid-glass-button text-white border-white/20 hover:border-white/40" onClick={e => {
-          e.stopPropagation();
-          onViewDetails(id);
-        }}>
+        <div
+          className={`absolute inset-0 bg-black/30 backdrop-blur-sm rounded-2xl flex items-center justify-center transition-all duration-150 ease-out ${
+            isHovered ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Button
+            size="sm"
+            className="liquid-glass-button text-white border-white/20 hover:border-white/40"
+            onClick={(e) => {
+              e.stopPropagation();
+              onViewDetails(id);
+            }}
+          >
             <Eye className="w-4 h-4 mr-2" />
             View Details
           </Button>
@@ -59,21 +73,34 @@ const ProductCard = ({
         <div className="text-xs font-medium text-white/70 uppercase tracking-wide">
           {category}
         </div>
-        
-        <h3 className="font-playfair font-semibold text-lg sm:text-xl leading-tight text-foreground line-clamp-2 no-text-glow">
+
+        <h3 className="font-playfair font-semibold text-base sm:text-xl leading-tight text-foreground line-clamp-2 no-text-glow">
           {title}
         </h3>
 
         {/* WhatsApp Enquiry */}
-        <div className="pt-2">
-          <WhatsAppEnquiry 
-            productName={title}
-            size="sm"
-            variant="glass"
-            className="w-full"
-          />
+        <div className="pt-2 flex justify-between items-center">
+          <div className="flex-1 hidden sm:block">
+            <WhatsAppEnquiry
+              productName={title}
+              size="sm"
+              variant="glass"
+              className="w-full"
+            />
+          </div>
+          <div className="flex sm:hidden w-full justify-end">
+            <WhatsAppEnquiry
+              productName={title}
+              size="icon"
+              variant="glass"
+              iconOnly
+              className="rounded-full p-2"
+            />
+          </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default ProductCard;

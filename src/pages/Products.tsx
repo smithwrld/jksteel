@@ -4,6 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Search, Filter, Grid, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import ProductCard from "@/components/products/ProductCard";
 import { products, categories } from "@/data/products";
 import { preloadImages } from "@/utils/image-cache";
@@ -14,6 +22,8 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [sortBy, setSortBy] = useState("name");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [currentPage, setCurrentPage] = useState(1);
+  const PRODUCTS_PER_PAGE = 12;
 
   // Aggressively preload all visible product images
   useEffect(() => {
@@ -56,6 +66,23 @@ const Products = () => {
 
     return filtered;
   }, [searchTerm, selectedCategory, sortBy]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory, sortBy]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredAndSortedProducts.length / PRODUCTS_PER_PAGE));
+  const firstProductIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const currentProducts = filteredAndSortedProducts.slice(
+    firstProductIndex,
+    firstProductIndex + PRODUCTS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -187,18 +214,22 @@ const Products = () => {
             </div>
           ) : (
             <>
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
                 <p className="text-slate-400">
-                  Showing {filteredAndSortedProducts.length} of {products.length} products
+                  Showing {Math.min(filteredAndSortedProducts.length, firstProductIndex + 1)}-
+                  {Math.min(filteredAndSortedProducts.length, firstProductIndex + currentProducts.length)} of {filteredAndSortedProducts.length} filtered products
+                </p>
+                <p className="text-slate-500 text-sm">
+                  Desktop pagination set to {PRODUCTS_PER_PAGE} products per page
                 </p>
               </div>
 
-              <div className={`grid gap-8 ${
+              <div className={`grid gap-4 sm:gap-6 lg:gap-8 ${
                 viewMode === "grid" 
-                  ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
+                  ? "grid-cols-2 md:grid-cols-3 xl:grid-cols-4" 
                   : "grid-cols-1"
               }`}>
-                {filteredAndSortedProducts.map((product) => (
+                {currentProducts.map((product) => (
                   <ProductCard
                     key={product.id}
                     {...product}
@@ -206,6 +237,49 @@ const Products = () => {
                   />
                 ))}
               </div>
+
+              {totalPages > 1 && (
+                <div className="mt-12 hidden md:block">
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handlePageChange(currentPage - 1);
+                          }}
+                          className={currentPage === 1 ? "pointer-events-none opacity-40" : ""}
+                        />
+                      </PaginationItem>
+                      {Array.from({ length: totalPages }).map((_, index) => (
+                        <PaginationItem key={index}>
+                          <PaginationLink
+                            href="#"
+                            isActive={currentPage === index + 1}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handlePageChange(index + 1);
+                            }}
+                          >
+                            {index + 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))}
+                      <PaginationItem>
+                        <PaginationNext
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handlePageChange(currentPage + 1);
+                          }}
+                          className={currentPage === totalPages ? "pointer-events-none opacity-40" : ""}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
+              )}
             </>
           )}
         </div>

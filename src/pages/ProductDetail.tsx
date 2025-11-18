@@ -162,9 +162,8 @@ const ProductDetail = () => {
         {/* Detailed Information Tabs */}
         <div className="mt-16">
           <Tabs defaultValue="features" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 glass-card">
+            <TabsList className="grid w-full grid-cols-1 glass-card">
               <TabsTrigger value="features" className="glass-button">Features</TabsTrigger>
-              <TabsTrigger value="specifications" className="glass-button">Specifications</TabsTrigger>
             </TabsList>
             
             <TabsContent value="features" className="mt-8">
@@ -174,18 +173,6 @@ const ProductDetail = () => {
                   {product.features.map((feature, index) => <div key={index} className="flex items-start space-x-3">
                       <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0 bg-zinc-500" />
                       <span>{feature}</span>
-                    </div>)}
-                </div>
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="specifications" className="mt-8">
-              <div className="glass-card p-8 rounded-2xl">
-                <h3 className="text-2xl font-playfair font-semibold mb-6">Technical Specifications</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {Object.entries(product.specifications).map(([key, value]) => <div key={key} className="flex justify-between items-center p-4 glass-card rounded-lg">
-                      <span className="font-medium">{key}</span>
-                      <span className="text-slate-200">{value}</span>
                     </div>)}
                 </div>
               </div>
@@ -292,7 +279,6 @@ const ProductDetailSkeleton = () => {
         {/* Tabs Skeleton */}
         <div className="mt-16">
           <div className="flex space-x-1 mb-8">
-            <Skeleton className="h-10 w-32" />
             <Skeleton className="h-10 w-32" />
           </div>
           <div className="glass-card p-8 rounded-2xl">

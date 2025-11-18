@@ -8,15 +8,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 interface WhatsAppEnquiryProps {
   productName: string;
   className?: string;
-  size?: "sm" | "default" | "lg";
+  size?: "icon" | "sm" | "default" | "lg";
   variant?: "default" | "outline" | "glass";
+  iconOnly?: boolean;
 }
 
 export const WhatsAppEnquiry = ({ 
   productName, 
   className = "", 
   size = "default",
-  variant = "default" 
+  variant = "default",
+  iconOnly = false
 }: WhatsAppEnquiryProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [customerName, setCustomerName] = useState("");
@@ -51,8 +53,8 @@ export const WhatsAppEnquiry = ({
           className={`${getButtonVariant()} bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 ${className}`}
           onClick={(e) => e.stopPropagation()}
         >
-          <MessageCircle className="w-4 h-4 mr-2" />
-          WhatsApp Enquiry
+          <MessageCircle className={`w-4 h-4 ${iconOnly ? "" : "mr-2"}`} />
+          {iconOnly ? <span className="sr-only">WhatsApp Enquiry</span> : "WhatsApp Enquiry"}
         </Button>
       </DialogTrigger>
       
